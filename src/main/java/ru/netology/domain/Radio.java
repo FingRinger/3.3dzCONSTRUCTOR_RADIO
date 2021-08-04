@@ -1,18 +1,41 @@
 package ru.netology.domain;
 
 public class Radio {
+    private int amountOfStation = 10;
     private int currentStation;
     private int maxStation = 9;
     private int minStation = 0;
     private int currentVolume;
-    private int maxVolume = 10;
+    private int maxVolume = 100;
     private int minVolume = 0;
 
-    public int getCurrentVolume() {
 
-        return currentVolume;
+    // конструктор для установки желаемого количества станций
+    public Radio(int amountOfStation) {
+        this.amountOfStation = amountOfStation;
+        if (amountOfStation < 10) {
+            maxStation = amountOfStation - 1;
+        }
+        if (amountOfStation > 10 ) {
+            maxStation = amountOfStation - 1;
+        }
     }
 
+    //NoArgsConstructor
+    public Radio() {
+    }
+
+    public int getAmountOfStation() {
+        return amountOfStation;
+    }
+
+    public int getMaxStation() {
+        return maxStation;
+    }
+
+    public int getCurrentVolume() {
+        return currentVolume;
+    }
 
     public void setCurrentVolume(int currentVolume) {
         this.currentVolume = currentVolume;
@@ -28,7 +51,7 @@ public class Radio {
 
 
     public void minusVolume() {
-        if (currentVolume == minVolume) {
+        if (currentVolume <= minVolume) {
             return;
         }
         this.currentVolume = currentVolume - 1;
@@ -51,7 +74,7 @@ public class Radio {
 
     public void prevStation() {
         if (currentStation <= minStation) {
-            currentStation = 9;
+            currentStation = maxStation;
         }
         else {
             this.currentStation = currentStation - 1;
